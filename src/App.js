@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { useDispatch } from "react-redux";
+import { getProducts } from "./actions/productActions";
+import Table from "./components/Table/Table.js";
+import Sidebar from "./components/Sidebar/Sidebar.js";
+import Nav from "./components/Nav/Nav.js";
+import "./App.css";
 
 function App() {
+  const dispatch = useDispatch();
+  dispatch(getProducts());
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+      <Nav />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          paddingTop: 50,
+          padding: 20,
+          height: "100%",
+        }}
+      >
+        <Sidebar />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            flex: 1,
+            marginLeft: 25,
+          }}
         >
-          Learn React
-        </a>
-      </header>
+          <Table />
+        </div>
+      </div>
     </div>
   );
 }
